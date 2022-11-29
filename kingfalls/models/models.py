@@ -25,7 +25,7 @@ class ciudad(models.Model):
     descripcion = fields.Char()
     comarca = fields.Many2one('kingfalls.comarca')
     bando = fields.Many2one('kingfalls.bando')
-    imagen = fields.Image(max_width = 500, max_height = 500)
+    image = fields.Image(max_width = 500, max_height = 500)
     poblacion = fields.Integer(default = 100)
     guardias = fields.Integer(default = 10)
     defensa = fields.Selection([('1', "Alta"), ('2', "Media"), ('3', "Baja")], default = '3')
@@ -36,7 +36,7 @@ class bando(models.Model):
 
     name = fields.Char(Required=True)
     descripcion = fields.Char(Required=True)
-    escudo = fields.Image(max_width = 250, max_height = 250)
+    image = fields.Image(max_width = 250, max_height = 250)
 
 class comarca(models.Model):
     _name = 'kingfalls.comarca'
@@ -44,7 +44,7 @@ class comarca(models.Model):
 
     name = fields.Char(Required=True)
     descripcion = fields.Char(Required=True)
-    imagen = fields.Image(max_width = 250, max_height = 250)
+    image = fields.Image(max_width = 250, max_height = 250)
 
 class raid(models.Model):
     _name = 'kingfalls.raid'
@@ -52,7 +52,7 @@ class raid(models.Model):
 
     name = fields.Char(Required=True)
     descripcion = fields.Char()
-    imagen = fields.Image(max_width = 500, max_height = 500)
+    image = fields.Image(max_width = 500, max_height = 500)
     amenaza = fields.Selection([('1', "Alta"), ('2', "Media"), ('3', "Baja")], default='1')
 
 class monstruos(models.Model):
@@ -61,7 +61,7 @@ class monstruos(models.Model):
 
     name = fields.Char(Required=True)
     descripcion = fields.Char()
-    imagen = fields.Image(max_width = 500, max_height = 500)
+    image = fields.Image(max_width = 500, max_height = 500)
     fuerza = fields.Integer()
     vida = fields.Integer(default = 50)
     aguante = fields.Integer(default = 75)

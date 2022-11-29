@@ -39,6 +39,48 @@
     </record>
 
       <!-- IU de las ciudades -->
+      <record model="ir.ui.view" id="kingfalls.ciudad_kanban">
+      <field name="name">ciudad kanban</field>
+      <field name="model">kingfalls.ciudad</field>
+      <field name="arch" type="xml">
+        <kanban>
+          <field name="id"/>
+          <field name="name"/>
+          <field name="comarca"/>
+          <field name="bando"/>
+          <field name="defensa"/>
+          <field name="poblacion"/>
+          <field name="guardias"/>
+          <field name="image"/>
+
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block"
+                     t-attf-style="background-image:url('#{kanban_image('kingfalls.ciudad',
+                     'image', record.id.value, placeholder)}')"
+                     >
+                </div>
+
+                <div class="oe_kanban_details d-flex flex-column">
+                  <a type="open">
+                    <h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                  <ul>
+                    <li>Comarca: <field name="comarca"/></li>
+                    <li>Bando: <field name="bando"/></li>
+                    <li>Defensa: <field name="defensa"/></li>
+                    <li>Poblacion: <field name="poblacion"/></li>
+                    <li>Guardias: <field name="guardias"/></li>
+                  </ul>
+                </div>
+              </div>
+
+
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
 
       <record model="ir.ui.view" id="kingfalls.ciudadtree">
       <field name="name">kingfalls list</field>
@@ -52,7 +94,7 @@
             <field name="defensa"/>
             <field name="poblacion"/>
             <field name="guardias"/>
-            <field name="imagen" widget="image"/>
+            <field name="image" widget="image"/>
         </tree>
       </field>
     </record>
@@ -71,7 +113,7 @@
               <field name="defensa"/>
               <field name="poblacion"/>
               <field name="guardias"/>
-              <field name="imagen" widget="image"/>
+              <field name="image" widget="image"/>
             </group>
           </sheet>
         </form>
@@ -87,7 +129,7 @@
         <tree>
             <field name="name"/>
             <field name="descripcion"/>
-            <field name="escudo" widget="image"/>
+            <field name="image" widget="image"/>
         </tree>
       </field>
     </record>
@@ -101,7 +143,7 @@
             <group>
               <field name="name"/>
               <field name="descripcion"/>
-              <field name="escudo" widget="image"/>
+              <field name="image" widget="image"/>
             </group>
           </sheet>
         </form>
@@ -118,7 +160,7 @@
             <field name="name"/>
             <field name="descripcion"/>
             <field name="amenaza"/>
-            <field name="imagen" widget="image"/>
+            <field name="image" widget="image"/>
         </tree>
       </field>
     </record>
@@ -133,7 +175,7 @@
               <field name="name"/>
               <field name="descripcion"/>
               <field name="amenaza"/>
-              <field name="imagen" widget="image"/>
+              <field name="image" widget="image"/>
             </group>
           </sheet>
         </form>
@@ -153,7 +195,7 @@
             <field name="nivel"/>
             <field name="vida"/>
             <field name="aguante"/>
-            <field name="imagen" widget="image"/>
+            <field name="image" widget="image"/>
         </tree>
       </field>
     </record>
@@ -171,7 +213,7 @@
               <field name="nivel"/>
               <field name="vida"/>
               <field name="aguante"/>
-              <field name="imagen" widget="image"/>
+              <field name="image" widget="image"/>
             </group>
           </sheet>
         </form>
@@ -187,7 +229,7 @@
         <tree>
             <field name="name"/>
             <field name="descripcion"/>
-            <field name="imagen" widget="image"/>
+            <field name="image" widget="image"/>
         </tree>
       </field>
     </record>
@@ -201,7 +243,7 @@
             <group>
               <field name="name"/>
               <field name="descripcion"/>
-              <field name="imagen" widget="image"/>
+              <field name="image" widget="image"/>
             </group>
           </sheet>
         </form>
@@ -221,7 +263,7 @@
     <record model="ir.actions.act_window" id="kingfalls.action_ciudad_window">
       <field name="name">Ciudad</field>
       <field name="res_model">kingfalls.ciudad</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <record model="ir.actions.act_window" id="kingfalls.action_comarca_window">

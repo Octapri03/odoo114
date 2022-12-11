@@ -10,12 +10,49 @@ class player(models.Model):
     _description = 'player of the game'
 
     name = fields.Char(Required=True)
-    contrasena = fields.Integer()
-    vida = fields.Integer(default = 100)
-    aguante = fields.Integer(default = 100)
-    nivel = fields.Integer(default = 1)
-    avatar = fields.Image(max_width = 250, max_height = 250)
+    comarca = fields.Many2one('kingfalls.comarca')
+    bando = fields.Many2one('kingfalls.bando')
+    poblacion = fields.Integer(default = 100)
+    guardias = fields.Integer(default = 10)
+    dinero = fields.Integer(default = 1000)
+    aliados = fields.Many2many('kingfalls.ciudad', compute='lista_aliados')
 
+    @api.depends('bando')
+    def lista_aliados(self):
+        for c in self:
+            c.aliados = self.env['kingfalls.ciudad'].search([( "bando.name", "=", c.bando.name )])
+            print(c.aliados)
+            print(c.bando)
+
+    @api.onchange('dinero')
+    def _onchange_dinero(self):
+        for c in self:  
+            print("patata")
+            if self.dinero == 0:
+                return {
+                    'warning': {
+                    'title': "Quiebra",
+                    'message': "Has gastado todo tu dinero",
+                    }
+                }
+
+    def sumar_guardias(self):
+        for b in self:
+            if b.dinero >= 1000:
+                b.guardias += 10
+                b.dinero -= 1000
+
+    @api.model
+    def produce(self):  # ORM CRON
+        self.search([]).produce_dinero()
+
+    def produce_dinero(self):
+        for player in self:
+            dinero = player.dinero + 500
+
+            player.write({
+                "dinero": dinero
+            })
 
 class ciudad(models.Model):
     _name = 'kingfalls.ciudad'
@@ -54,6 +91,8 @@ class raid(models.Model):
     descripcion = fields.Char()
     image = fields.Image(max_width = 500, max_height = 500)
     amenaza = fields.Selection([('1', "Alta"), ('2', "Media"), ('3', "Baja")], default='1')
+
+
 
 class monstruos(models.Model):
     _name = 'kingfalls.monstruos'

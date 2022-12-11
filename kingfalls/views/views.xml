@@ -9,12 +9,13 @@
       <field name="model">kingfalls.player</field>
       <field name="arch" type="xml">
         <tree>
-            <field name="avatar" widget="image"/>
             <field name="name"/>
-            <field name="contrasena"/>
-            <field name="nivel"/>
-            <field name="vida"/>
-            <field name="aguante"/>
+            <field name="bando"/>
+            <field name="comarca"/>
+            <field name="poblacion"/>
+            <field name="guardias"/>
+            <field name="dinero"/>
+            <field name="aliados"/>
         </tree>
       </field>
     </record>
@@ -27,11 +28,52 @@
           <sheet>
             <group>
               <field name="name"/>
-              <field name="contrasena"/>
-              <field name="nivel"/>
-              <field name="vida"/>
-              <field name="aguante"/>
-              <field name="avatar" widget="image"/>
+              <field name="comarca"/>
+              <field name="bando"/>
+              <field name="poblacion"/>
+              <field name="guardias"/>
+              <field name="dinero"/>
+              <button name="sumar_guardias"
+                    type="object"
+                    string="Obtener Guardias"
+                    class="btn btn-primary">
+              </button>
+              <field name="aliados">
+              <kanban>
+                  <field name="id"/>
+                  <field name="name"/>
+                  <field name="comarca"/>
+                  <field name="bando"/>
+                  <field name="defensa"/>
+                  <field name="poblacion"/>
+                  <field name="guardias"/>
+                  <field name="image"/>
+
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                        <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block"
+                             t-attf-style="background-image:url('#{kanban_image('kingfalls.ciudad',
+                             'image', record.id.value, placeholder)}')"
+                             >
+                        </div>
+
+                        <div class="oe_kanban_details d-flex flex-column">
+                          <a type="open">
+                            <h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                          <ul>
+                            <li>Comarca: <field name="comarca"/></li>
+                            <li>Bando: <field name="bando"/></li>
+                            <li>Defensa: <field name="defensa"/></li>
+                            <li>Poblacion: <field name="poblacion"/></li>
+                            <li>Guardias: <field name="guardias"/></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </t>
+                  </templates>
+                </kanban>
+              </field>
             </group>
           </sheet>
         </form>
@@ -156,7 +198,7 @@
       <field name="name">kingfalls list</field>
       <field name="model">kingfalls.raid</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree decoration-danger="amenaza=='1'" decoration-warning="amenaza=='2'" decoration-success="amenaza=='3'">
             <field name="name"/>
             <field name="descripcion"/>
             <field name="amenaza"/>
@@ -257,7 +299,7 @@
     <record model="ir.actions.act_window" id="kingfalls.action_player_window">
       <field name="name">Jugador</field>
       <field name="res_model">kingfalls.player</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,kanban,form</field>
     </record>
 
     <record model="ir.actions.act_window" id="kingfalls.action_ciudad_window">

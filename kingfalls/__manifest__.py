@@ -28,6 +28,8 @@
         'views/views.xml',
         'views/cron.xml',
         'views/templates.xml',
+        'views/battle.xml',
+        'demo/demo.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -3,5 +3,6 @@ access_kingfalls_player,kingfalls.player,model_kingfalls_player,base.group_user,
 access_kingfalls_ciudad,kingfalls.ciudad,model_kingfalls_ciudad,base.group_user,1,1,1,1
 access_kingfalls_bando,kingfalls.bando,model_kingfalls_bando,base.group_user,1,1,1,1
 access_kingfalls_raid,kingfalls.raid,model_kingfalls_raid,base.group_user,1,1,1,1
-access_kingfalls_monstruos,kingfalls.monstruos,model_kingfalls_monstruos,base.group_user,1,1,1,1
 access_kingfalls_comarca,kingfalls.comarca,model_kingfalls_comarca,base.group_user,1,1,1,1
+access_kingfalls_mina,kingfalls.mina,model_kingfalls_mina,base.group_user,1,1,1,1
+access_kingfalls_battle,kingfalls.battle,model_kingfalls_battle,base.group_user,1,1,1,1

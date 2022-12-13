@@ -31,7 +31,7 @@ class player(models.Model):
     @api.depends('dinero')
     def lista_minas(self):
         for c in self:
-            c.minas = self.env['kingfalls.mina'].search([( "precio", "<", c.dinero )])
+            c.minas = self.env['kingfalls.mina'].search([( "precio", "<=", c.dinero )])
             print(c.minas)
             print(c.dinero)
 

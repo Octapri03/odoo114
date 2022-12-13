@@ -41,6 +41,8 @@
                     string="Obtener Guardias"
                     class="btn btn-primary">
               </button>
+            </group>
+            <group>
               <field name="aliados">
                 <kanban>
                     <field name="id"/>
@@ -109,7 +111,7 @@
                               string="Comprar Mina"
                               class="btn btn-primary"
                               context="{'ctx_player':parent.id}">
-                              </button>
+                              Comprar Mina</button>
                           </div>
                         </div>
                       

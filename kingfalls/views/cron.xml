@@ -2,7 +2,7 @@
     <data>
         <record model="ir.cron" forcecreate="True" id="kingfalls.cron_produce">
             <field name="name">Game: Cron Produce</field>
-            <field name="model_id" ref="model_kingfalls_player"/>
+            <field name="model_id" ref="model_res_partner"/>
             <field name="state">code</field>
             <field name="code">model.produce()</field>
             <field name="user_id" ref="base.user_root"/>

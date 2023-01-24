@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Kingfalls",
+    'name': "wallapop",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -24,13 +24,9 @@
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
-        'views/player.xml',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
-        'views/cron.xml',
         'views/templates.xml',
-        'views/battle.xml',
-        'demo/demo.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

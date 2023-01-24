@@ -8,7 +8,8 @@ from odoo.exceptions import ValidationError
 
 
 class player(models.Model):
-    _name = 'kingfalls.player'
+    _inherit = 'res.partner'
+    _name = 'res.partner'
     _description = 'player of the game'
 
     name = fields.Char(required=True)
@@ -122,7 +123,7 @@ class mina(models.Model):
  
     def comprar_mina(self):
         for b in self:
-            player = self.env['kingfalls.player'].browse(self.env.context['ctx_player'])[0]
+            player = self.env['res.partner'].browse(self.env.context['ctx_player'])[0]
             player.produccion = player.produccion + b.produccion
             player.dinero = player.dinero - b.precio
 
@@ -146,8 +147,8 @@ class battle(models.Model):
     date_start = fields.Datetime(readonly=True, default=fields.Datetime.now)
     date_end = fields.Datetime(compute='_get_duracion')
     progress = fields.Float()
-    player1 = fields.Many2one('kingfalls.player')
-    player2 = fields.Many2one('kingfalls.player')
+    player1 = fields.Many2one('res.partner')
+    player2 = fields.Many2one('res.partner')
     winner = fields.Many2one()
     draft = fields.Boolean()
 
@@ -178,6 +179,7 @@ class battle(models.Model):
             else:
                 time = 1.0
                 b.date_end = fields.Datetime.to_string(fields.Datetime.from_string(b.date_start) + timedelta(days=time))
+
     
 
 

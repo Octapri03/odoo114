@@ -1,0 +1,245 @@
+<odoo>
+  <data>
+
+    <!-- A temperatura ambiente el IQ basicamente, -->
+
+    <!-- IU de los players -->
+    <record model="ir.ui.view" id="kingfalls.playertree">
+      <field name="name">kingfalls list</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="bando"/>
+            <field name="comarca"/>
+            <field name="poblacion"/>
+            <field name="guardias"/>
+            <field name="dinero"/>
+            <field name="produccion"/>
+            <field name="aliados"/>
+            <field name="minas"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="kingfalls.playerform">
+      <field name="name">kingfalls list</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="comarca"/>
+              <field name="bando"/>
+              <field name="poblacion"/>
+              <field name="guardias"/>
+              <field name="dinero" attrs="{'invisible':[('dinero', '=', 0)]}"/>
+              <field name="produccion"/>
+              <button name="sumar_guardias"
+                    type="object"
+                    string="Obtener Guardias"
+                    class="btn btn-primary">
+              </button>
+            </group>
+            <group>
+              <field name="aliados">
+                <kanban>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="comarca"/>
+                    <field name="bando"/>
+                    <field name="defensa"/>
+                    <field name="poblacion"/>
+                    <field name="guardias"/>
+                    <field name="image"/>
+
+                    <templates>
+                      <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                          <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block"
+                               t-attf-style="background-image:url('#{kanban_image('kingfalls.ciudad',
+                               'image', record.id.value, placeholder)}')"
+                               >
+                          </div>
+
+                          <div class="oe_kanban_details d-flex flex-column">
+                            <a type="open">
+                              <h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                            <ul>
+                              <li>Comarca: <field name="comarca"/></li>
+                              <li>Bando: <field name="bando"/></li>
+                              <li>Defensa: <field name="defensa"/></li>
+                              <li>Poblacion: <field name="poblacion"/></li>
+                              <li>Guardias: <field name="guardias"/></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </t>
+                    </templates>
+                  </kanban>
+              </field>
+              <field name="minas">
+                <kanban>
+                  <field name="id"/>
+                  <field name="name"/>
+                  <field name="produccion"/>
+                  <field name="precio"/>
+                  <field name="image"/>
+        
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                        <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block"
+                             t-attf-style="background-image:url('#{kanban_image('kingfalls.mina',
+                             'image', record.id.value, placeholder)}')"
+                             >
+                        </div>
+        
+                        <div class="oe_kanban_details d-flex flex-column">
+                          <a type="open">
+                            <h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                          <ul>
+                            <li>Produccion: <field name="produccion"/></li>
+                            <li>Precio: <field name="precio"/></li>
+                          </ul>
+                        </div>
+
+                          <div class="oe_kanban_details d-flex flex-column">
+                              <button name="comprar_mina"
+                              type="object"
+                              string="Comprar Mina"
+                              class="btn btn-primary"
+                              context="{'ctx_player':parent.id}">
+                              Comprar Mina</button>
+                          </div>
+                        </div>
+                      
+                    </t>
+                    </templates>
+                  </kanban>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Inherit -->
+
+    <record model="ir.ui.view" id="kingfalls.player_partner_list">
+      <field name="name">kingfalls player partner</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <notebook>
+            <page string="Players">
+            <group>
+                <sheet>
+            <group>
+              <field name="name"/>
+              <field name="comarca"/>
+              <field name="bando"/>
+              <field name="poblacion"/>
+              <field name="guardias"/>
+              <field name="dinero" attrs="{'invisible':[('dinero', '=', 0)]}"/>
+              <field name="produccion"/>
+              <button name="sumar_guardias"
+                    type="object"
+                    string="Obtener Guardias"
+                    class="btn btn-primary">
+              </button>
+            </group>
+            <group>
+              <field name="aliados">
+                <kanban>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="comarca"/>
+                    <field name="bando"/>
+                    <field name="defensa"/>
+                    <field name="poblacion"/>
+                    <field name="guardias"/>
+                    <field name="image"/>
+
+                    <templates>
+                      <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                          <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block"
+                               t-attf-style="background-image:url('#{kanban_image('kingfalls.ciudad',
+                               'image', record.id.value, placeholder)}')"
+                               >
+                          </div>
+
+                          <div class="oe_kanban_details d-flex flex-column">
+                            <a type="open">
+                              <h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                            <ul>
+                              <li>Comarca: <field name="comarca"/></li>
+                              <li>Bando: <field name="bando"/></li>
+                              <li>Defensa: <field name="defensa"/></li>
+                              <li>Poblacion: <field name="poblacion"/></li>
+                              <li>Guardias: <field name="guardias"/></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </t>
+                    </templates>
+                  </kanban>
+              </field>
+              <field name="minas">
+                <kanban>
+                  <field name="id"/>
+                  <field name="name"/>
+                  <field name="produccion"/>
+                  <field name="precio"/>
+                  <field name="image"/>
+        
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill ">
+                        <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block"
+                             t-attf-style="background-image:url('#{kanban_image('kingfalls.mina',
+                             'image', record.id.value, placeholder)}')"
+                             >
+                        </div>
+        
+                        <div class="oe_kanban_details d-flex flex-column">
+                          <a type="open">
+                            <h4 class="o_kanban_record_title oe_partner_heading"><field name="name"/></h4></a>
+                          <ul>
+                            <li>Produccion: <field name="produccion"/></li>
+                            <li>Precio: <field name="precio"/></li>
+                          </ul>
+                        </div>
+
+                          <div class="oe_kanban_details d-flex flex-column">
+                              <button name="comprar_mina"
+                              type="object"
+                              string="Comprar Mina"
+                              class="btn btn-primary"
+                              context="{'ctx_player':parent.id}">
+                              Comprar Mina</button>
+                          </div>
+                        </div>
+                      
+                    </t>
+                    </templates>
+                  </kanban>
+              </field>
+            </group>
+          </sheet>
+            </group>
+            </page>
+        </notebook>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="kingfalls.action_player_window">
+      <field name="name">Jugador</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    </data>
+</odoo>
